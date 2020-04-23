@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Align(
                       alignment: Alignment.topRight,
@@ -66,6 +66,16 @@ class HomeScreen extends StatelessWidget {
                             width: 230,
                             fit: BoxFit.fitWidth,
                             alignment: Alignment.topCenter,
+                          ),
+                          Positioned(
+                            top: 20,
+                            left: 150,
+                            child: Text(
+                              'All you need \nis stay at home.',
+                              style: kHeadingTextStyle.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ],
                       ),

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: InfoScreen(),
+      home: HomeScreen(),
     );
   }
 }

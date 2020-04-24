@@ -1,51 +1,155 @@
 import 'package:covid19ui/constant.dart';
 import 'package:covid19ui/widgets/my_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          MyHeader(
-            image: 'assets/icons/coronadr.svg',
-            textTop: 'Get to know',
-            textBottom: 'About Covid-19.',
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Symptoms',
-                  style: kTitleTextStyle,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            MyHeader(
+              image: 'assets/icons/coronadr.svg',
+              textTop: 'Get to know',
+              textBottom: 'About Covid-19.',
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Symptoms',
+                    style: kTitleTextStyle,
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      SymptomCard(
+                        image: 'assets/images/headache.png',
+                        title: 'Headache',
+                        isActive: true,
+                      ),
+                      SymptomCard(
+                        image: 'assets/images/cough.png',
+                        title: 'Cough',
+                      ),
+                      SymptomCard(
+                        image: 'assets/images/fever.png',
+                        title: 'Fever',
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Prevention',
+                    style: kTitleTextStyle,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  PreventCard(
+                    image: 'assets/images/wear_mask.png',
+                    title: 'Wear face mask',
+                    text:
+                        'Since the start of the coronavirus outbreak some places have fully embraced wearing facemask',
+                  ),
+                  PreventCard(
+                    image: 'assets/images/wash_hands.png',
+                    title: 'Wash your hand',
+                    text:
+                        'Since the start of the coronavirus outbreak some places have fully embraced wearing facemask',
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PreventCard extends StatelessWidget {
+  final String image;
+  final String title;
+  final String text;
+
+  const PreventCard({
+    Key key,
+    this.image,
+    this.title,
+    this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: SizedBox(
+        height: 156,
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: <Widget>[
+            Container(
+              height: 136,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 8),
+                    blurRadius: 24,
+                    color: kShadowColor,
+                  )
+                ],
+              ),
+            ),
+            Image.asset(image),
+            Positioned(
+              left: 130,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
                 ),
-                SizedBox(height: 20),
-                Row(
+                height: 136,
+                width: MediaQuery.of(context).size.width - 170,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SymptomCard(
-                      image: 'assets/images/headache.png',
-                      title: 'Headache',
-                      isActive: true,
+                    Text(
+                      title,
+                      style: kTitleTextStyle.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
-                    SymptomCard(
-                      image: 'assets/images/cough.png',
-                      title: 'Cough',
+                    Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
                     ),
-                    SymptomCard(
-                      image: 'assets/images/fever.png',
-                      title: 'Fever',
-                    ),
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: SvgPicture.asset('assets/icons/forward.svg')),
                   ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
